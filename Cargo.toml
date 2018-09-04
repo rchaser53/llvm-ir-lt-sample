@@ -4,8 +4,6 @@ version = "0.1.0"
 authors = ["rchaser53 <tayoshizawa29@gmail.com>"]
 
 [dependencies]
-
-[dependencies]
 libc = "0.2"
 llvm-sys = "60"
 
