@@ -24,9 +24,7 @@ impl LlvmBuilder {
     }
 
     pub fn setup_main(&mut self) -> *mut LLVMValue {
-        let main = unsafe {
-          self.add_function(LLVMInt32Type(), &mut [], "main")
-        };
+        let main = unsafe { self.add_function(LLVMInt32Type(), &mut [], "main") };
         let block = self.append_basic_block("main", "entry");
         self.end_basic_block(block);
         main
@@ -65,9 +63,9 @@ impl LlvmBuilder {
     }
 
     pub fn return_main(&mut self) {
-      unsafe {
-        LLVMBuildRet(self.builder, LLVMConstInt(LLVMInt32Type(), 0, 0));
-      }
+        unsafe {
+            LLVMBuildRet(self.builder, LLVMConstInt(LLVMInt32Type(), 0, 0));
+        }
     }
 
     pub fn dump(&self) {
@@ -92,5 +90,3 @@ impl Drop for LlvmBuilder {
         }
     }
 }
-
-

@@ -18,7 +18,7 @@ fn main() {
     /*
       you can enjoy below llvm ir emit function
       please uncomment what you want.
-    */ 
+    */
 
     // create hello world llvm ir
     hello_world(&mut llvm_builder);

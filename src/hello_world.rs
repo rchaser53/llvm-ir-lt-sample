@@ -1,13 +1,11 @@
-use std::ffi::CString;
 use llvm_sys::core::*;
 use llvm_sys::*;
+use std::ffi::CString;
 
-use utils::*;
 use llvm_builder::*;
+use utils::*;
 
-pub fn hello_world(
-    lb: &mut LlvmBuilder,
-) {
+pub fn hello_world(lb: &mut LlvmBuilder) {
     unsafe {
         lb.setup_main();
         let print = create_printf(lb.module);
