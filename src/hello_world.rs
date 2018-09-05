@@ -17,7 +17,7 @@ pub fn hello_world(
             lb.builder,
             print,
             printf_args.as_mut_ptr(),
-            1,
+            printf_args.len() as u32,
             CString::new("").unwrap().as_ptr(),
         );
 
