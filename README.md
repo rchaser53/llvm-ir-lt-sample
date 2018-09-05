@@ -21,3 +21,12 @@
 
   - hello_world
   - loop_struct
+
+## install llvm
+
+  you may need to install llvm at first.
+
+  ```
+  # in mac
+  $ brew install --with-clang --with-lld --with-python --HEAD llvm
+  ```
