@@ -3,22 +3,24 @@ use llvm_sys::core::*;
 use llvm_sys::*;
 
 use utils::*;
+use llvm_builder::*;
 
 pub fn hello_world(
-    builder: *mut LLVMBuilder,
-    context: *mut LLVMContext,
-    module: *mut LLVMModule,
+    lb: &mut LlvmBuilder,
 ) {
     unsafe {
-        let print = create_printf(module);
-        let mut printf_args = [codegen_string(builder, context, "hello world\n\r")];
+        lb.setup_main();
+        let print = create_printf(lb.module);
+        let mut printf_args = [codegen_string(lb.builder, lb.context, "hello world\n\r")];
 
         LLVMBuildCall(
-            builder,
+            lb.builder,
             print,
             printf_args.as_mut_ptr(),
             1,
             CString::new("").unwrap().as_ptr(),
         );
+
+        lb.return_main();
     }
 }

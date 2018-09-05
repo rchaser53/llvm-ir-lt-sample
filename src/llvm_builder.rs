@@ -23,12 +23,13 @@ impl LlvmBuilder {
         }
     }
 
-    pub fn setup_main(&mut self) {
-        unsafe {
-          self.add_function(LLVMInt32Type(), &mut [], "main");
-        }
+    pub fn setup_main(&mut self) -> *mut LLVMValue {
+        let main = unsafe {
+          self.add_function(LLVMInt32Type(), &mut [], "main")
+        };
         let block = self.append_basic_block("main", "entry");
         self.end_basic_block(block);
+        main
     }
 
     pub fn add_function(
