@@ -108,7 +108,7 @@ pub fn set_field_value(
             LLVMConstInt(LLVMInt32Type(), target_index, 0),
         ];
 
-        let mut field = LLVMBuildInBoundsGEP(
+        let field = LLVMBuildInBoundsGEP(
             builder,
             target_struct,
             range.as_mut_ptr(),

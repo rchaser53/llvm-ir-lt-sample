@@ -15,7 +15,7 @@ macro_rules! c_string {
 
 pub fn loop_struct(lb: &mut LlvmBuilder) {
     unsafe {
-        let mut named = LLVMStructCreateNamed(lb.context, c_string!("test_struct"));
+        let named = LLVMStructCreateNamed(lb.context, c_string!("test_struct"));
         let mut elements = [LLVMInt32Type(), LLVMInt32Type()];
         LLVMStructSetBody(named, elements.as_mut_ptr(), 2, 0);
 
@@ -34,7 +34,7 @@ pub fn loop_struct(lb: &mut LlvmBuilder) {
             0,
             LLVMConstInt(LLVMInt32Type(), 12, 0),
         );
-        let mut field = get_field_value(lb.builder, target_struct, 0);
+        let field = get_field_value(lb.builder, target_struct, 0);
 
         let struct_test_func_ret = LLVMBuildAdd(
             lb.builder,
@@ -46,29 +46,29 @@ pub fn loop_struct(lb: &mut LlvmBuilder) {
 
         /**/
         let mut param_types = [LLVMInt32Type()];
-        let mut ret_type = LLVMFunctionType(LLVMInt32Type(), param_types.as_mut_ptr(), 1, 0);
+        let ret_type = LLVMFunctionType(LLVMInt32Type(), param_types.as_mut_ptr(), 1, 0);
 
-        let mut main = LLVMAddFunction(lb.module, c_string!("main"), ret_type);
-        let mut entry = LLVMAppendBasicBlock(main, c_string!("entry"));
+        let main = LLVMAddFunction(lb.module, c_string!("main"), ret_type);
+        let entry = LLVMAppendBasicBlock(main, c_string!("entry"));
 
-        let mut loop_block = LLVMAppendBasicBlockInContext(lb.context, main, c_string!("loop"));
-        let mut loop_end_block =
+        let loop_block = LLVMAppendBasicBlockInContext(lb.context, main, c_string!("loop"));
+        let loop_end_block =
             LLVMAppendBasicBlockInContext(lb.context, main, c_string!("loop_end"));
 
         LLVMPositionBuilderAtEnd(lb.builder, entry);
         /**/
 
-        let mut llvm_printf_int = create_printf_int(lb.module);
+        let llvm_printf_int = create_printf_int(lb.module);
 
-        let mut val = LLVMBuildAlloca(lb.builder, LLVMInt32Type(), c_string!(""));
+        let val = LLVMBuildAlloca(lb.builder, LLVMInt32Type(), c_string!(""));
         LLVMBuildStore(lb.builder, LLVMConstInt(LLVMInt32Type(), 0, 0), val);
 
         LLVMBuildBr(lb.builder, loop_block);
         LLVMPositionBuilderAtEnd(lb.builder, loop_block);
 
         // // loop
-        let mut load_val = LLVMBuildLoad(lb.builder, val, c_string!(""));
-        let mut lhs = LLVMBuildAdd(
+        let load_val = LLVMBuildLoad(lb.builder, val, c_string!(""));
+        let lhs = LLVMBuildAdd(
             lb.builder,
             LLVMConstInt(LLVMInt32Type(), 1, 0),
             load_val,
@@ -81,7 +81,7 @@ pub fn loop_struct(lb: &mut LlvmBuilder) {
             LLVMBuildLoad(lb.builder, val, c_string!("")),
         ];
 
-        let mut for_cond = LLVMBuildICmp(
+        let for_cond = LLVMBuildICmp(
             lb.builder,
             LLVMIntPredicate::LLVMIntUGT,
             lhs,

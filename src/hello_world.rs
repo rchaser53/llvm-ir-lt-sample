@@ -1,5 +1,4 @@
 use llvm_sys::core::*;
-use llvm_sys::*;
 use std::ffi::CString;
 
 use llvm_builder::*;
