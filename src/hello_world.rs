@@ -22,5 +22,7 @@ pub fn hello_world(
         );
 
         lb.return_main();
+
+        lb.emit_file("hello_world.ll");
     }
 }

@@ -15,3 +15,9 @@
   ```
   $ cargo run
   ```
+
+### contents
+  uncomment what you want to play
+
+  - hello_world
+  - loop_struct
